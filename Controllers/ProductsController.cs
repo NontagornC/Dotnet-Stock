@@ -99,5 +99,19 @@ namespace dotnet_stock.Controllers
                   return StatusCode((int)HttpStatusCode.Created, product);
             }
 
+            [HttpDelete("{id}")]
+            public async Task<IActionResult> DeletProductAsync(int id)
+            {
+                  var product = await this.DatabaseContext.Products.FindAsync(id);
+                  if (product == null)
+                  {
+                        return NotFound();
+                  }
+
+                  this.DatabaseContext.Products.Remove(product);
+                  this.DatabaseContext.SaveChanges();
+                  return NoContent();
+            }
+
       }
 }
