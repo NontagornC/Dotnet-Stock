@@ -14,7 +14,7 @@ namespace dotnet_stock.Controllers
 {
       // ApiController จะเป็นตัว validate ในระดับ controller ถ้าไม่ต้องการ check ก็ comment ApiController ทิ้งสะ
       [Route("api/[controller]")]
-      // [ApiController]
+      [ApiController]
       public class ProductsController : ControllerBase
       {
             public DatabaseContext DatabaseContext { get; set; }
@@ -72,7 +72,7 @@ namespace dotnet_stock.Controllers
             }
 
             [HttpPost("")]
-            public IActionResult AddProduct([FromForm] Product productRequest)
+            public IActionResult AddProduct([FromForm] ProductRequest productRequest)
             {
                   var categoryExists = this.DatabaseContext.Categories.Any(c => c.CategoryId == productRequest.CategoryId);
                   if (!categoryExists)
