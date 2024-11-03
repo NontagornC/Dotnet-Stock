@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using dotnet_stock.Data;
 using dotnet_stock.DTO.Products;
 using dotnet_stock.Entities;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 //using dotnet_stock.Models;
@@ -80,14 +81,18 @@ namespace dotnet_stock.Controllers
                         return BadRequest("Invalid CategoryId. The specified category does not exist.");
                   }
 
-                  var product = new Product()
-                  {
-                        Name = productRequest.Name,
-                        Stock = productRequest.Stock,
-                        Price = productRequest.Price,
-                        CategoryId = productRequest.CategoryId
-                  };
-                  product.Image = "";
+                  // without mapster
+                  // var product = new Product()
+                  // {
+                  //       Name = productRequest.Name,
+                  //       Stock = productRequest.Stock,
+                  //       Price = productRequest.Price,
+                  //       CategoryId = productRequest.CategoryId
+                  // };
+                  // product.Image = "";
+
+                  // with mapster
+                  var product = productRequest.Adapt<Product>();
 
                   this.DatabaseContext.Products.Add(product);
                   this.DatabaseContext.SaveChanges();
