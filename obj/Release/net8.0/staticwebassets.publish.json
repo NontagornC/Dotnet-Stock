@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "kPTy0PbXAG6GqyJIE7VGmLySpbqJLVUwcpvraTku7E0=",
+  "Source": "dotnet_stock",
+  "BasePath": "_content/dotnet_stock",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
