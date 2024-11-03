@@ -1,3 +1,6 @@
+using dotnet_stock.Entities;
+using Microsoft.AspNetCore.Mvc;
+
 namespace dotnet_stock.DTO.Products
 {
       public class ProductResponse
