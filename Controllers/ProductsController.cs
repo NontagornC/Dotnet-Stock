@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using dotnet_stock.Data;
 using dotnet_stock.DTO.Products;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 //using dotnet_stock.Models;
 
 namespace dotnet_stock.Controllers
@@ -21,10 +22,17 @@ namespace dotnet_stock.Controllers
             }
 
             [HttpGet("")]
-            public IActionResult GetProducts()
+            public ActionResult<IEnumerable<ProductResponse>> GetProducts()
+            // public IActionResult GetProducts()
             {
-                  var products = this.DatabaseContext.Products.ToList();
-                  return Ok(products);
+                  // without join
+                  // var products = this.DatabaseContext.Products.ToList();
+
+                  // with join
+                  var products = this.DatabaseContext.Products.Include(p => p.Category).Select(ProductResponse.FromProduct).ToList();
+                  // return Ok(products);
+
+                  return products;
             }
 
             [HttpGet("{id}")]
@@ -45,9 +53,19 @@ namespace dotnet_stock.Controllers
                   // return NotFound();
 
 
-                  // lin q
-                  var selectedProduct = this.DatabaseContext.Products.Select(ProductResponse.FromProduct).Where(p => p.ProductId == id).FirstOrDefault();
+                  // lin q with join category
+                  var selectedProduct = this.DatabaseContext.Products.Include(p => p.Category).Select(ProductResponse.FromProduct).Where(p => p.ProductId == id).FirstOrDefault();
                   return Ok(selectedProduct);
+            }
+
+
+            [HttpGet("search")]
+            public ActionResult<IEnumerable<ProductResponse>> Search([FromQuery] string name)
+            {
+                  // FromQuery เป็นการบอก dotnet ว่าจะต้องดึงค่าจาก query string
+                  // เช่น http://localhost:5000/api/Products/search?name=product_name
+                  var result = this.DatabaseContext.Products.Include(p => p.Category).Where(p => p.Name.ToLower().Contains(name.ToLower())).Select(ProductResponse.FromProduct).ToList();
+                  return result;
             }
 
       }

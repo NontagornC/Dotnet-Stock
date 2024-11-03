@@ -8,6 +8,8 @@ namespace dotnet_stock.DTO.Products
             public int Stock { get; set; }
             public decimal Price { get; set; }
 
+            public string CategoryName { get; set; } = "";
+
             public static ProductResponse FromProduct(dotnet_stock.Entities.Product product)
             {
                   return new ProductResponse
@@ -17,6 +19,7 @@ namespace dotnet_stock.DTO.Products
                         Image = product.Image,
                         Stock = product.Stock,
                         Price = product.Price,
+                        CategoryName = product.Category.Name
                   };
 
             }
