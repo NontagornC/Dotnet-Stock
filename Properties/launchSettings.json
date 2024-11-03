@@ -12,7 +12,8 @@
     "http": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      // เปลี่ยน launchUrl เพื่อไม่ต้องรันอัติโนมัติ
+      "launchBrowser": false,
       "launchUrl": "swagger",
       "applicationUrl": "http://localhost:5019",
       "environmentVariables": {
