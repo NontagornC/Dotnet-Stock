@@ -1,0 +1,31 @@
+# deploy in production
+
+## https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/?view=aspnetcore-6.0
+
+# run this command to generate production build files
+
+# UseAppHost=true : to generate exe file - you start the app from the exe file direct
+
+# UseAppHost=false : to generate dll file - you must start via "dotnet <project.dll>"
+
+- dotnet publish -c Release -o ./publish /p:UseAppHost=true/false
+- ./publish/backend (run in standalone mode)
+- dotnet ./publish/backend.dll (run in dotnet environment)
+
+# set running port in production (mac)
+
+- export ASPNETCORE_URLS=http://+:8081
+- echo $ASPNETCORE_URLS
+
+# set running port in production (win)
+
+- set ASPNETCORE_URLS=http://+:8081
+- echo %ASPNETCORE_URLS%
+
+# run the execution file
+
+publish/backend
+
+
+# deploy on iis
+- https://www.youtube.com/watch?v=1Dplvq6Clho

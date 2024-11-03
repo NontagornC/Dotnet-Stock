@@ -1,0 +1,35 @@
+# new project
+dotnet new webapi --use-controllers -o dotnet8_hero           
+cd dotnet8_hero
+dotnet run
+
+
+# add package
+- ef
+
+
+dotnet cli
+dotnet --version
+
+
+# Install package
+- using cli
+  dotnet tool <pacakge>
+
+- using dotnet core extension 
+  >dotnet>nuget pacakge  
+
+# Install dotnet tool (https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install)
+dotnet tool install - Installs the specified .NET tool on your machine.
+sudo dotnet tool install --global dotnet-ef
+dotnet-ef --version
+dotnet ef --version
+
+sudo dotnet tool update --global dotnet-ef
+sudo dotnet tool uninstall --global dotnet-ef
+
+
+# Install dotnet package to project (https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package)
+# dotnet add package - Adds a package reference to a project file.
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer

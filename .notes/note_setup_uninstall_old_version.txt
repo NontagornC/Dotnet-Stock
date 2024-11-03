@@ -1,0 +1,8 @@
+https://dotnet.microsoft.com/en-us/download
+
+# uninstall
+https://docs.microsoft.com/en-us/dotnet/core/additional-tools/uninstall-tool?tabs=macos
+https://github.com/dotnet/cli-lab/releases
+sudo ./dotnet-core-uninstall remove --sdk  5.0.400
+sudo ./dotnet-core-uninstall remove --runtime  5.0.9
+./dotnet-core-uninstall list

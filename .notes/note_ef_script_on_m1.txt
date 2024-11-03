@@ -1,0 +1,11 @@
+sudo dotnet tool install --global dotnet-ef
+
+sudo dotnet tool update --global dotnet-ef
+sudo dotnet tool uninstall --global dotnet-ef
+
+# Install dependency
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+
+# Generate
+sudo dotnet ef dbcontext scaffold "Server=localhost,1433;user id=sa; password=Tel1234!; Database=istock; TrustServerCertificate=True;"  Microsoft.EntityFrameworkCore.SqlServer -o Entities -c DatabaseContext --context-dir Data

@@ -1,3 +1,4 @@
+using dotnet_stock.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace dotnet_stock.Controllers;
@@ -12,11 +13,21 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
+    public DatabaseContext DatabaseContext { get; }
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, DatabaseContext databaseContext)
     {
+        this.DatabaseContext = databaseContext;
         _logger = logger;
     }
+
+    [HttpGet("Test")]
+    public IActionResult GetTModel()
+    {
+        var result = this.DatabaseContext.Products.ToList();
+        return Ok(result);
+    }
+
 
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()

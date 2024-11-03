@@ -1,0 +1,26 @@
+// Define the endpoint URL
+const url = 'http://localhost:5100/Products';
+
+// Define the headers
+const headers = {
+  'accept': 'text/plain',
+  'Authorization': 'Bearer <Your Token>'
+};
+
+// Make the fetch request
+fetch(url, {
+  method: 'GET',
+  headers: headers
+})
+.then(response => {
+  if (!response.ok) {
+    throw new Error('Network response was not ok ' + response.statusText);
+  }
+  return response.text(); // or .json() if you expect JSON response
+})
+.then(data => {
+  console.log(data); // Handle the response data
+})
+.catch(error => {
+  console.error('There was a problem with the fetch operation:', error);
+});
