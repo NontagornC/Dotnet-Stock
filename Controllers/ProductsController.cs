@@ -1,16 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
-using dotnet_stock.Data;
 using dotnet_stock.DTO.Products;
 using dotnet_stock.Entities;
 using dotnet_stock.Interfaces;
-using dotnet_stock.Services;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 //using dotnet_stock.Models;
 
 namespace dotnet_stock.Controllers
@@ -20,18 +13,16 @@ namespace dotnet_stock.Controllers
       [ApiController]
       public class ProductsController : ControllerBase
       {
-            public DatabaseContext DatabaseContext { get; set; }
             public IProductservice Productservice { get; }
-            public ProductsController(DatabaseContext databaseContext, IProductservice productservice)
+            public ProductsController(IProductservice productservice)
             {
                   this.Productservice = productservice;
-                  this.DatabaseContext = databaseContext;
 
             }
 
             [HttpGet("")]
             // ใช้ service
-            public async Task<ActionResult<IEnumerable<ProductResponse>>> GetProducts()
+            public async Task<ActionResult<IEnumerable<ProductResponse>>> GetProductsAsync()
             {
                   return (await this.Productservice.FindAll()).Select(ProductResponse.FromProduct).ToList();
             }
@@ -132,9 +123,21 @@ namespace dotnet_stock.Controllers
             //       return StatusCode((int)HttpStatusCode.Created, product);
             // }
             [HttpPost("")]
-            public async Task<ActionResult<Product>> AddProduct([FromForm] ProductRequest productRequest)
+            public async Task<ActionResult<Product>> AddProductAsync([FromForm] ProductRequest productRequest)
             {
+                  string finalImageName = "";
+                  if (productRequest.FormFiles != null)
+                  {
+                        (string errorMessage, string imageName) = await Productservice.UploadImage(productRequest.FormFiles);
+                        if (!String.IsNullOrEmpty(errorMessage))
+                        {
+                              return BadRequest();
+                        }
+                        finalImageName = imageName;
+
+                  }
                   var product = productRequest.Adapt<Product>();
+                  product.Image = finalImageName;
                   await this.Productservice.Create(product);
                   return StatusCode((int)HttpStatusCode.Created, product);
             }

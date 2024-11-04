@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "tKd5AC5UGSI=",
+  "dgSpecHash": "eXJYGgDkTKI=",
   "success": true,
   "projectFilePath": "/Users/nontagorn/Desktop/Dotnet/dotnet_stock/dotnet_stock.csproj",
   "expectedPackageFiles": [
+    "/Users/nontagorn/.nuget/packages/autofac/8.1.0/autofac.8.1.0.nupkg.sha512",
+    "/Users/nontagorn/.nuget/packages/autofac.extensions.dependencyinjection/10.0.0/autofac.extensions.dependencyinjection.10.0.0.nupkg.sha512",
     "/Users/nontagorn/.nuget/packages/azure.core/1.35.0/azure.core.1.35.0.nupkg.sha512",
     "/Users/nontagorn/.nuget/packages/azure.identity/1.10.3/azure.identity.1.10.3.nupkg.sha512",
     "/Users/nontagorn/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
@@ -62,7 +64,7 @@
     "/Users/nontagorn/.nuget/packages/system.composition.runtime/6.0.0/system.composition.runtime.6.0.0.nupkg.sha512",
     "/Users/nontagorn/.nuget/packages/system.composition.typedparts/6.0.0/system.composition.typedparts.6.0.0.nupkg.sha512",
     "/Users/nontagorn/.nuget/packages/system.configuration.configurationmanager/6.0.1/system.configuration.configurationmanager.6.0.1.nupkg.sha512",
-    "/Users/nontagorn/.nuget/packages/system.diagnostics.diagnosticsource/6.0.1/system.diagnostics.diagnosticsource.6.0.1.nupkg.sha512",
+    "/Users/nontagorn/.nuget/packages/system.diagnostics.diagnosticsource/8.0.1/system.diagnostics.diagnosticsource.8.0.1.nupkg.sha512",
     "/Users/nontagorn/.nuget/packages/system.drawing.common/6.0.0/system.drawing.common.6.0.0.nupkg.sha512",
     "/Users/nontagorn/.nuget/packages/system.formats.asn1/5.0.0/system.formats.asn1.5.0.0.nupkg.sha512",
     "/Users/nontagorn/.nuget/packages/system.identitymodel.tokens.jwt/6.35.0/system.identitymodel.tokens.jwt.6.35.0.nupkg.sha512",

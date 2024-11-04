@@ -22,6 +22,7 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 // ในแต่ละ Request (เช่น การเรียก HTTP Request หนึ่งครั้ง) จะมีการสร้าง Instance ของ ProductService ขึ้นมาแค่หนึ่งครั้ง และจะใช้ Instance เดิมนั้นตลอดในระหว่างการทำงานของ Request นั้น ๆ
 // เหมาะกับ Service ที่ต้องการเก็บสถานะไว้ในช่วงของการ Request หรือจำเป็นต้องใช้งานแบบแชร์กันภายใน Request นั้น ๆ แต่ไม่แชร์กับ Request อื่น
 builder.Services.AddScoped<IProductservice, ProductService>();
+builder.Services.AddScoped<IUploadFileService, UploadFileService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -40,7 +41,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseStaticFiles();
 app.MapControllers();
 
 app.Run();

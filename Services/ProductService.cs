@@ -13,10 +13,13 @@ namespace dotnet_stock.Services
     public class ProductService : IProductservice
     {
         public DatabaseContext DatabaseContext { get; }
-        public ProductService(DatabaseContext databaseContext)
+
+        public IUploadFileService UploadFileService { get; set; }
+
+        public ProductService(DatabaseContext databaseContext, IUploadFileService uploadFileService)
         {
             this.DatabaseContext = databaseContext;
-
+            this.UploadFileService = uploadFileService;
         }
         public async Task<IEnumerable<Product>> FindAll()
         {
@@ -35,7 +38,6 @@ namespace dotnet_stock.Services
         {
             var selectedProduct = await this.DatabaseContext.Products.Include(p => p.Category).Where(p => p.ProductId == id).FirstOrDefaultAsync();
             return selectedProduct;
-
         }
 
         public async Task<IEnumerable<Product>> Search(string name)
@@ -62,9 +64,20 @@ namespace dotnet_stock.Services
             await DatabaseContext.SaveChangesAsync();
         }
 
-        public Task<(string errorMessage, string imageName)> UploadImage(List<IFormFile> formFiles)
+        public async Task<(string errorMessage, string imageName)> UploadImage(List<IFormFile> formFiles)
         {
-            throw new NotImplementedException();
+            string errorMesage = String.Empty;
+            string imageName = String.Empty;
+            if (UploadFileService.IsUpload(formFiles))
+            {
+                errorMesage = UploadFileService.Validation(formFiles);
+                if (String.IsNullOrEmpty(errorMesage))
+                {
+                    imageName = (await UploadFileService.UploadImages(formFiles))[0];
+                }
+            }
+            return (errorMesage, imageName);
         }
     }
+
 }

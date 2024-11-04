@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("dotnet_stock")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+954c99b80b7c870c150f74be3071cf098d822417")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e557f724dd8661ed87eea0d70b1b70fe10376c17")]
 [assembly: System.Reflection.AssemblyProductAttribute("dotnet_stock")]
 [assembly: System.Reflection.AssemblyTitleAttribute("dotnet_stock")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
