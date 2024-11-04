@@ -1,3 +1,6 @@
+using System.Reflection;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using dotnet_stock.Data;
 using dotnet_stock.Interfaces;
 using dotnet_stock.Services;
@@ -21,8 +24,20 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 // AddScoped:
 // ในแต่ละ Request (เช่น การเรียก HTTP Request หนึ่งครั้ง) จะมีการสร้าง Instance ของ ProductService ขึ้นมาแค่หนึ่งครั้ง และจะใช้ Instance เดิมนั้นตลอดในระหว่างการทำงานของ Request นั้น ๆ
 // เหมาะกับ Service ที่ต้องการเก็บสถานะไว้ในช่วงของการ Request หรือจำเป็นต้องใช้งานแบบแชร์กันภายใน Request นั้น ๆ แต่ไม่แชร์กับ Request อื่น
-builder.Services.AddScoped<IProductservice, ProductService>();
-builder.Services.AddScoped<IUploadFileService, UploadFileService>();
+// Add Service manual
+// builder.Services.AddScoped<IProductservice, ProductService>();
+// builder.Services.AddScoped<IUploadFileService, UploadFileService>();
+
+// Add Servicer auto by Autofac
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
+{
+    builder.RegisterAssemblyTypes(Assembly.GetEntryAssembly())
+    .Where(t => t.Name.EndsWith("Service"))
+    .AsImplementedInterfaces();
+});
+// จะ scan หา class ที่ชื่อลงท้ายด้วยคำว่า Service
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

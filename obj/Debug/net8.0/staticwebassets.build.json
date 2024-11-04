@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "aLXM60fyn3p59SO6/AaVskKlYjBZ2SR20NtepQWsHBY=",
+  "Hash": "CZdAp+A5RZaMpIrhKc85ss8YfihWd9idsWTdfi9UVdk=",
   "Source": "dotnet_stock",
   "BasePath": "_content/dotnet_stock",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/d08aa599-76e1-41e9-a413-6cc837cdb93b.jpg"
+    },
+    {
+      "Identity": "/Users/nontagorn/Desktop/Dotnet/dotnet_stock/wwwroot/images/de78865d-68ef-4f14-8e51-bfc76b521b22.jpg",
+      "SourceId": "dotnet_stock",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/nontagorn/Desktop/Dotnet/dotnet_stock/wwwroot/",
+      "BasePath": "_content/dotnet_stock",
+      "RelativePath": "images/de78865d-68ef-4f14-8e51-bfc76b521b22.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/de78865d-68ef-4f14-8e51-bfc76b521b22.jpg"
     },
     {
       "Identity": "/Users/nontagorn/Desktop/Dotnet/dotnet_stock/wwwroot/images/product_01.jpg",
