@@ -3,13 +3,18 @@ using dotnet_stock.DTO.Products;
 using dotnet_stock.Entities;
 using dotnet_stock.Interfaces;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 //using dotnet_stock.Models;
 
 namespace dotnet_stock.Controllers
 {
       // ApiController จะเป็นตัว validate ในระดับ controller ถ้าไม่ต้องการ check ก็ comment ApiController ทิ้งสะ
+      // Roles จะไปอ่านจาก JWT
+
+      // token = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6IkFkbWluIiwiYWRkaXRpb25hbCI6InRvZG8iLCJsZXZlbCI6ImdlbmVyYWwiLCJleHAiOjE3MzA5MTA0MTQsImlzcyI6Ik5vbnRhZ29ybi5jaGEiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdCJ9.uAHGUsGUnpxuF708TVi9XUdSeqS0_gR0_tiPGbHhhh_qR1EhQmKpBUxLbFDo_vQOhlipCLsazfE1bOayUsGimg 
       [Route("api/[controller]")]
+      [Authorize(Roles = "Admin, Cashier")]
       [ApiController]
       public class ProductsController : ControllerBase
       {
@@ -21,7 +26,8 @@ namespace dotnet_stock.Controllers
             }
 
             [HttpGet("")]
-            // ใช้ service
+            [AllowAnonymous]
+            // AllowAnonymous เพื่อไม่ต้อง Authorize
             public async Task<ActionResult<IEnumerable<ProductResponse>>> GetProductsAsync()
             {
                   return (await this.Productservice.FindAll()).Select(ProductResponse.FromProduct).ToList();
