@@ -9,16 +9,17 @@ using Microsoft.IdentityModel.Tokens;
 using dotnet_stock.Interfaces;
 using dotnet_stock.Data;
 using dotnet_stock.Entities;
+using static dotnet_stock.Installers.JwtInstaller;
 
 namespace dotnet8_hero.Interfaces
 {
     public class AccountService : IAccountService
     {
         private readonly DatabaseContext databaseContext;
-        // private readonly JwtSettings jwtSettings;
-        public AccountService(DatabaseContext databaseContext)
+        private readonly JwtSettings jwtSettings;
+        public AccountService(DatabaseContext databaseContext, JwtSettings jwtSettings)
         {
-            // this.jwtSettings = jwtSettings;
+            this.jwtSettings = jwtSettings;
             this.databaseContext = databaseContext;
         }
 
@@ -94,6 +95,7 @@ namespace dotnet8_hero.Interfaces
 
         public string GenerateToken(Account account)
         {
+            // paylaod ว่าส่งอะไรบ้าง
             var claims = new[]{
                 new Claim(JwtRegisteredClaimNames.Sub, account.Username),
                 new Claim("role", account.Role.Name),
@@ -101,9 +103,7 @@ namespace dotnet8_hero.Interfaces
                 new Claim("level", "general"),
             };
 
-            // return BuildToken(claims);
-            return "1234";
-
+            return BuildToken(claims);
         }
 
         public Account GetInfo(string accessToken)
@@ -124,21 +124,21 @@ namespace dotnet8_hero.Interfaces
             return account;
         }
 
-        // private string BuildToken(Claim[] claims)
-        // {
-        //     var expires = DateTime.Now.AddDays(Convert.ToDouble(jwtSettings.Expire));
-        //     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key));
-        //     var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
+        private string BuildToken(Claim[] claims)
+        {
+            var expires = DateTime.Now.AddDays(Convert.ToDouble(jwtSettings.Expire));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
+            // claims = payload
+            var token = new JwtSecurityToken(
+                issuer: jwtSettings.Issuer,
+                audience: jwtSettings.Audience,
+                claims: claims,
+                expires: expires,
+                signingCredentials: creds
+            );
 
-        //     var token = new JwtSecurityToken(
-        //         issuer: jwtSettings.Issuer,
-        //         audience: jwtSettings.Audience,
-        //         claims: claims,
-        //         expires: expires,
-        //         signingCredentials: creds
-        //     );
-
-        //     return new JwtSecurityTokenHandler().WriteToken(token);
-        // }
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
     }
 }

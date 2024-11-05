@@ -146,3 +146,4 @@
 /Users/nontagorn/Desktop/Dotnet/dotnet_stock/bin/Debug/net8.0/dotnet_stock.staticwebassets.runtime.json
 /Users/nontagorn/Desktop/Dotnet/dotnet_stock/bin/Debug/net8.0/Autofac.dll
 /Users/nontagorn/Desktop/Dotnet/dotnet_stock/bin/Debug/net8.0/Autofac.Extensions.DependencyInjection.dll
+/Users/nontagorn/Desktop/Dotnet/dotnet_stock/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -59,8 +59,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+// ต้องใส่ 2 ตัวถึงจะรัน jwt service ได้
+app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseStaticFiles();
 app.MapControllers();
 
