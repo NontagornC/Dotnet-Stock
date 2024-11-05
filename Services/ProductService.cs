@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using dotnet_stock.Data;
 using dotnet_stock.DTO.Products;
 using dotnet_stock.Entities;
+using dotnet_stock.Installers;
 using dotnet_stock.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -48,6 +49,7 @@ namespace dotnet_stock.Services
 
         public async Task Create(Product product)
         {
+            product.Name.IsValidProductName();
             this.DatabaseContext.Products.Add(product);
             await DatabaseContext.SaveChangesAsync();
         }

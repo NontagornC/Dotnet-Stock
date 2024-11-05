@@ -2,6 +2,7 @@ using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using dotnet_stock.Data;
+using dotnet_stock.Installers;
 using dotnet_stock.Interfaces;
 using dotnet_stock.Services;
 using Microsoft.EntityFrameworkCore;
@@ -12,8 +13,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // dotnet add package Microsoft.EntityFrameworkCore.InMemory
 // using Microsoft.EntityFrameworkCore;
-builder.Services.AddDbContext<DatabaseContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionSQLServer")));
+// Basic setup
+// builder.Services.AddDbContext<DatabaseContext>(options =>
+//     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionSQLServer")));
+
+// อันนี้ก็งงชิบหาย เรียกใช้ data base แทน
+builder.Services.InstallServiceInAssembly(builder.Configuration);
 
 // Add Product service
 // AddTransient:
